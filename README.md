@@ -1,2 +1,2 @@
 # leetcode
-This repository is used to record the process of exercising.
+This repository is used to record process of exercising.
