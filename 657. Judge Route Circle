@@ -1,1 +1,34 @@
+难度等级：easy
 
+主要语言：python
+
+题目描述：给出一指令序列，判断小机器人按指令移动后能否再回到起点(0,0)
+
+思路：第一反应就是对平面坐标(x,y)进行变换，起点设为(0,0)。指令U(上移)对应x+1，指令D(下移)对应x-1，指令L(左移)对应y-1，指令R(右移)对应y+1，最后判断经过一系列操作后能否回到点(0,0)
+
+代码：
+class Solution(object):
+    def judgeCircle(self, moves):
+        """
+        :type moves: str
+        :rtype: bool
+        """
+        
+        x = 0
+        y = 0
+        for letter in moves:
+            if letter == "U":
+                x = x + 1
+            if letter == "D":
+                x = x - 1
+            if letter == "L":
+                y = y - 1
+            if letter == "R":
+                y = y + 1
+        if x == 0 and y == 0:
+            return True
+        else:
+            return False
+
+存在问题：
+看到题目中样例输出结果为true和false，考虑到布尔值对应的写法为True和False，于是将返回值写为了"true"和"false"字符串，提交结果时果断报了错=。=
