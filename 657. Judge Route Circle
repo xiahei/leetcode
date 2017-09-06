@@ -32,3 +32,8 @@ class Solution(object):
 
 存在问题：
 看到题目中样例输出结果为true和false，考虑到布尔值对应的写法为True和False，于是将返回值写为了"true"和"false"字符串，提交结果时果断报了错=。=
+
+啊～看到了一个很有意思的解法～用字典模拟复平面操作
+def judgeCircle(self, moves):
+    direct = {'U': 1, 'D': -1, 'L': 1j, 'R': -1j}
+    return 0 == sum(direct[m] for m in moves)
