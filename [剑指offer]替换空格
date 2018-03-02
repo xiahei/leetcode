@@ -1,0 +1,15 @@
+'''
+新建一个函数，将字符串中所有的空格替换成'%20'。例如输入'We are happy'，则输出'We%20are%20happy'。
+'''
+
+方法一：用正则替换
+# -*- coding:utf-8 -*-
+import re
+class Solution:
+    # s 源字符串
+    def replaceSpace(self, s):
+        # write code here
+        news = re.sub(' ','%20',s)
+        return news
+        
+方法二：书中给的方法
