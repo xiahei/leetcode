@@ -35,7 +35,6 @@ def find_repeat_number(array):
     return False
 
 def find_repeat_number2(array):
-    num_dict = {}
     #judge input array valid or not
     num_length = len(array)
     if num_length <= 0:
@@ -67,3 +66,31 @@ if __name__ == "__main__":
 长度为n+1的数组中所有数字范围都在1~n之内，则数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。
 例如，输入长度为8的数组{2,3,5,4,3,2,6,7}，那么对应输出的是重复数字2或者3。
 '''
+#-*-coding:utf-8-*-
+def find_repeat_number(array):
+    num_dict = {}
+    num_length = len(array)
+    if num_length <= 0:
+        return False
+    for i in array:
+        if i > num_length-1:
+            return False
+    for num in array:
+        if num in num_dict:
+            return num
+        else:
+            num_dict[num] = 1
+    return False
+
+def find_repeat_number2(array):
+    num_length = len(array)
+    if num_length <= 0:
+        return False
+    for i in array:
+        if i > num_length-1:
+            return False
+    #数组中一定存在重复的数字，将数组一分为二，若左半部分不存在重复数字，则右半部分存在重复数字
+
+if __name__ == "__main__":
+    input_array = [2,3,5,1,1,4,5]
+    print (find_repeat_number2(input_array))
