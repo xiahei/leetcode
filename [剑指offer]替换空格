@@ -13,3 +13,30 @@ class Solution:
         return news
         
 方法二：书中给的方法
+# -*- coding:utf-8 -*-
+class Solution:
+    # s 源字符串
+    def replaceSpace(self, s):
+        # write code here
+        if not isinstance(s,str) or len(s)<0 or s==None:
+            return False
+        if len(s) == 0:#字符串为空，返回原字符串
+            return s
+        count = 0
+        for w in s:
+            if w == ' ':
+                count += 1
+        length = len(s) + 2*count
+        new_str = length * [None]
+        origin_index = len(s) - 1
+        new_index = length - 1
+        while (origin_index >= 0 and new_index >= origin_index):
+            if s[origin_index] == ' ':
+                new_str[new_index-2:new_index+1] = ['%','2','0']
+                origin_index -= 1
+                new_index -= 3
+            else:
+                new_str[new_index] = s[origin_index]
+                origin_index -= 1
+                new_index -= 1
+        return ''.join(new_str)
