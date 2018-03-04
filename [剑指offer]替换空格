@@ -18,7 +18,7 @@ class Solution:
     # s 源字符串
     def replaceSpace(self, s):
         # write code here
-        if not isinstance(s,str) or len(s)<0 or s==None:
+        if not isinstance(s,str) or len(s)<0 or s==None:#C语言中的空指针对应python中的None
             return False
         if len(s) == 0:#字符串为空，返回原字符串
             return s
