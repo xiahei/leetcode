@@ -66,6 +66,7 @@ if __name__ == "__main__":
 长度为n+1的数组中所有数字范围都在1~n之内，则数组中至少有一个数字是重复的。请找出数组中任意一个重复的数字，但不能修改输入的数组。
 例如，输入长度为8的数组{2,3,5,4,3,2,6,7}，那么对应输出的是重复数字2或者3。
 '''
+方法一：时间复杂度O(n),空间复杂度O(n)
 #-*-coding:utf-8-*-
 def find_repeat_number(array):
     num_dict = {}
@@ -93,4 +94,61 @@ def find_repeat_number2(array):
 
 if __name__ == "__main__":
     input_array = [2,3,5,1,1,4,5]
+    print (find_repeat_number2(input_array))
+
+方法二：时间复杂度O(n),空间复杂度O(1)
+#-*-coding:utf-8-*-
+
+'''
+[2,3,5,4,3,2,6,7]
+2,3
+[1,1,0,2,3,3]
+False
+[1,1,2,3,4,5]
+1
+[0,1,2,3,4,5]
+False
+[0,2,3]
+False
+[]
+False
+'''
+
+'''
+数组长度为n+1,其中包含值为1～n的数字，则数组中必定存在重复数字
+按1～n的顺序进行划分，设中间数字为m，统计[1,m]区间内每个数字出现的总次数，若总次数大于m，则该区间内必定存在重复数字;
+否则到区间[m+1,n]内寻找
+'''
+
+
+def cal_count(array,start,end):
+    count = 0
+    for num in array:
+        if num >= start and num <= end:
+            count += 1
+    return count
+
+def find_repeat_number2(array):
+    num_length = len(array)
+    if num_length <= 0:
+        return False
+    for i in array:
+        if (i > num_length-1) or (i == 0):
+            return False
+    #[1,m],[m+1,num_length-1]
+    start = 1
+    end = num_length - 1
+    while(end >= start):
+        middle = (end - start) / 2 + start 
+        count = cal_count(array,start,middle) #统计左半区间数字出现总数
+        if (start == end):
+            if count > 1:
+                return start
+        if count > middle:
+            end = middle
+        else:
+            start = middle + 1
+
+if __name__ == "__main__":
+    input_array = [1,1,2,3,4,5]
     print (find_repeat_number2(input_array))
