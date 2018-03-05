@@ -1,7 +1,0 @@
-难度等级：easy
-主要语言：SQL语句
-题目描述：从World表中筛选出 土地面积>3000000 或 人口密度>25000000 的行
-代码：
-select name,population,area 
-from World 
-where area > 3000000 or population > 25000000
