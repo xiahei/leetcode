@@ -1,3 +1,41 @@
 #堆排序（大顶堆、小顶堆）
 #以大顶堆为例，堆排序共分为两个过程:1、将无序数组建成一个堆 2、将最大的数输出与数组最后一个数交换位置并输出，同时对新堆重新排序
 #建堆存在两种方法：1、从左至右遍历数组，对每个元素做上浮操作 2、从右至左遍历数组，对每个元素做下沉操作
+#代码还存在问题
+def adjustheap(array,i,length):
+    tmp = array[i]
+    k = i*2+1
+    while (k<length):
+        if (k+1<length) and (array[k]<array[k+1]):
+            k += 1
+        if (array[k]>tmp):
+            array[i],array[k] = array[k],array[i]
+            i = k
+            k = 2*k+1
+        else:
+            break
+    return array
+
+def heapsort(array):
+    if len(array) <= 1:
+        return
+    #建堆
+    for i in range((len(array)/2-1),-1,-1): #从最后一个非叶子节点开始调整[0,len(array)/2-1]
+        print i
+        array = adjustheap(array,i,len(array))
+        print array
+    #输出并排序
+    for i in range(len(array)-1,0,-1):
+        array[0],array[i] = array[i],array[0]
+        array = adjustheap(array,i-1,len(array))
+    print array
+
+
+if __name__ == "__main__":
+    #array = [0,2,2,1,3]
+    #array = [6, 8, 1, 4, 3, 9, 5, 4, 11, 2, 2, 15, 6]
+    #array = [0,3,4,5,2]
+    #array = []
+    array = [0,1,2,3,4]
+    heapsort(array)
+    #print newarray
