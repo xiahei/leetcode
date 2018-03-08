@@ -1,0 +1,64 @@
+//动态规划
+public class Test(){
+    public static void main(String[] args){
+        System.out.println(maxLength(8));
+    }
+    
+    public int maxLength(int length){
+        if(length<2){
+            return 0;
+        }
+        if(length==2){
+            return 1;
+        }
+        if(length==3){
+            return 2;
+        }
+        
+        int[] len = new int[length+1];
+        len[0] = 0;
+        len[1] = 1;
+        len[2] = 2;
+        len[3] = 3;
+        
+        int max=0; 
+        for(int i=4;i<=length;i++){
+            max = 0;
+            for(int j=1;j<i/2;j++){
+                value = len[i]*len[j-i];
+                if(max<value){
+                    max = value;
+                }           
+            }
+            len[i] = max;
+        }
+        
+        max = len[length];
+        return max;
+    }
+}
+
+//贪婪算法
+public class Test(){
+    public static void main(String[] args){
+        System.out.println(maxLength(8));
+    }
+    
+    public int maxLength(int length){
+        if(length<2)
+            return 0;
+        if(length==2)
+            return 1;
+        if(length==3)
+            return 2;
+            
+        int timesOf3 = length/3;
+        if(length-timeOf3*3==1){
+            timeOf3 -= 1;
+        }
+        
+        int timesOf2 = (length-timesOf3*3)/2;
+        
+        return (int)Math.pow(3,timesOf3) * (int)Math.pow(2,timesOf2);
+    }    
+}
