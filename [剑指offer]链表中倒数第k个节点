@@ -1,0 +1,31 @@
+//定义两个指针fast和slow，当fast到达链表末尾时，slow正好位于倒数第k个位置
+//注意倒数第0个节点为null;当链表为空或k为0时，返回null;当k值超出链表长度时，返回null;
+/*
+public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}*/
+public class Solution {
+    public ListNode FindKthToTail(ListNode head,int k) {
+        if(head==null||k==0) {return null;}
+        ListNode fast = head;
+        ListNode slow = head;
+        for(int i=1;i<k;i++){
+            if(fast.next!=null){
+                fast = fast.next;
+            }
+            else{
+                return null;
+            }
+        }
+        while(fast.next!=null){
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return slow;
+    }
+}
