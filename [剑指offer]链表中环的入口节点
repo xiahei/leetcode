@@ -1,0 +1,66 @@
+//如果一个链表中包含环，如何找出环的入口节点
+//将问题分为三步：（1）判断链表中是否有环（2）计算环的长度（3）找到环的入口点
+//（1）用两个指针p1和p2，p1每次走一步，p2每次走两步，若最终p1和p2相遇，则存在环;p1初始化为头节点，p2初始化为头节点后一个节点;注意链表为空和长度为一的特殊情况
+//（2）若链表中存在环，则上一步返回的节点必在环中，利用此特性计算出环的长度
+//（3）用两个指针slow和fast，slow指向头节点，fast指向距离头节点长度为环长度的节点，后让slow和fast同时移动，相遇时必指向入口节点
+
+
+/*
+ public class ListNode {
+    int val;
+    ListNode next = null;
+
+    ListNode(int val) {
+        this.val = val;
+    }
+}
+*/
+public class Solution {
+    
+    public ListNode EntryNodeOfLoop(ListNode pHead)
+    {
+        if(pHead==null){return null;}
+        //loop exists or not
+        boolean flag = false;
+        ListNode p1 = pHead;
+        ListNode p2 = pHead.next;
+        if(p2==null){
+            return null;
+        }
+        while(pHead!=null){
+            if(p1==p2){
+                flag = true;
+                break;
+            }
+            else{
+                p1 = p1.next;
+                p2 = p2.next.next;
+            }
+        }
+        
+        if(flag){
+        //find loop length
+        p1 = p1.next;
+        int loopLength = 1;
+        while(p1!=p2){
+            p1 = p1.next;
+            loopLength++;
+        }
+        
+        //find entrance
+         ListNode fast = pHead;
+         ListNode slow = pHead;
+         for(int i=0;i<loopLength;i++){
+             fast = fast.next;
+         }
+         while(fast!=slow){
+             fast = fast.next;
+             slow = slow.next;
+         }
+         return slow;
+        }
+        
+        return null;
+        
+    }
+}
