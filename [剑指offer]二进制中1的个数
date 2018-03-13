@@ -1,1 +1,12 @@
-
+//输入一个整数，输出该数二进制表示中1的个数
+//把一个整数减去1后再与原数做位与运算，每次可把整数的二进制表示中的最后一个1变为0
+public class Solution {
+    public int NumberOf1(int n){
+        int numOfOne = 0;
+        while(n!=0){
+            numOfOne++;
+            n = (n-1) & n;
+        }
+        return numOfOne;
+    }
+}
