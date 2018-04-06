@@ -1,0 +1,41 @@
+题目二：左旋转字符串
+方法一：没用到高深的算法，只对list做了操作
+主要思路：
+输入n，将前n个字符拼接到原字符串后，返回从第n位开始的字符串
+
+class Solution:
+    def LeftRotateString(self, s, n):
+        # write code here
+        length = len(s)
+        if(length<=0):
+            return ""
+        s = list(s)
+        s.extend(s[:n])
+        return ''.join(s[n:])
+        
+    def method2(self, s, n):
+        return s[n:]+s[:n]
+        
+方法二：书上的方法
+主要思路：三次翻转
+先翻转整个字符串，对前len(s)-n位进行翻转，对后n位进行翻转
+例：abcdefg -> gfedcba -> cdegfab 
+class Solution:
+    def LeftRotateString(self, s, n):
+        # write code here
+        length = len(s)
+        if(length<=0):
+            return ""
+        s = s[::-1]
+        s = list(s)
+        self.reverse(s,0,length-n)
+        self.reverse(s,length-n,length)
+        return ''.join(s)
+    
+    def reverse(self,array,start,end):
+        i = start
+        j = end-1
+        while(i<j):
+            array[i],array[j] = array[j],array[i]
+            i += 1
+            j -= 1
