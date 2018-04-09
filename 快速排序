@@ -9,19 +9,18 @@ array = [6, 8, 1, 4, 3, 9, 5, 4, 11, 2, 2, 15, 6]
 array = [3,4,5,2]
 [2,3,4,5]
 '''
-def partition(array,low,high):
+def partition(array,start,end):
+    low = start
+    high = end
     pivot = array[low]
-    i,j = low,high
     while(low<high):#从右向左找到小于pivot的值,从左向右找到大于pivot的值,将两个值交换
         while(low<high) and (array[high] >= pivot):
             high = high - 1
         while(low<high) and (array[low] <= pivot):
             low = low + 1
-        tmp = array[low]
-        array[low] = array[high]
-        array[high] = tmp
+        array[high],array[low] = array[low],array[high]
     #将pivot放入正确位置
-    array[i] = array[low]
+    array[start] = array[low]
     array[low] = pivot
     return low
 
