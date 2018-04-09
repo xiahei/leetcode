@@ -1,0 +1,55 @@
+方法一：最小堆
+无需对数组进行，可用于海量数据，时间复杂度为为O(nlogk)
+
+import heapq
+
+def printTopK(array,k):
+    length = len(array)
+    if(length<=0 or k<=0):
+        return []
+    res = []
+    for num in array:
+        if(len(res)<k):
+            heapq.heappush(res,num)
+        else:
+            heapq.heappushpop(res,num)
+    return res
+
+#array = [2,3,4,5,6,1,1]
+#print printTopK(array,5)
+
+方法二：partition
+时间复杂度为O(n),需要改变数组才能完成
+注：partition中改变不等式方向即可求最小的K个值
+
+def partition(array,start,end):
+    low = start
+    high = end
+    pivot = array[low]
+    while(low<high):
+        while(low<high and array[high]<=pivot):
+            high = high - 1
+        while(low<high and array[low]>=pivot):
+            low = low + 1
+        array[low],array[high] = array[high],array[low]
+    array[start] = array[low]
+    array[low] = pivot
+    return low
+
+def getTopKNumber(array,k):
+    start = 0
+    end = len(array)-1
+    
+    index = partition(array,start,end)
+    while(index!=k-1):
+        if(index<k-1):
+            start = index+1
+            index = partition(array,start,end)
+        else:
+            end = index-1
+            index = partition(array,start,end)    
+
+    return array[:k]
+
+array = [2,3,4,5,6,1,1]
+print getTopKNumber(array,5)
